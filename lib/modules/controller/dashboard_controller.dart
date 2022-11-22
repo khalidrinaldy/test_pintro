@@ -10,11 +10,20 @@ class DashboardController extends GetxController {
   RxInt _currentIndex = 0.obs;
   int get currentIndex => _currentIndex.value;
   set currentIndex(int currentIndex) => _currentIndex.value = currentIndex;
-
+  
   void changeNavBar(int index) => currentIndex = index;
 
   final List<Widget> headOfPages = <Widget>[
-    Image.asset("assets/logo-pintro.png"),
+    Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: SizedBox(
+          width: 50,
+          height: 50,
+          child: Image.asset(
+            "assets/logo-pintro.png",
+            fit: BoxFit.cover,
+          )),
+    ),
     Text("Setting"),
   ];
 
@@ -22,7 +31,7 @@ class DashboardController extends GetxController {
     HomeView(),
     SettingView(),
   ];
-
+  
   RxInt _colorValue = (math.Random().nextDouble() * 0xFFFFFF).toInt().obs;
   int get colorValue => _colorValue.value;
   set colorValue(int colorValue) => _colorValue.value = colorValue;
@@ -42,19 +51,10 @@ class DashboardController extends GetxController {
   set currentBackPressTime(DateTime currentBackPressTime) =>
       _currentBackPressTime.value = currentBackPressTime;
 
-  Future<bool> onWillPop() {
-    DateTime now = DateTime.now();
-    if (currentBackPressTime.year == 1970 ||
-        now.difference(currentBackPressTime) > Duration(seconds: 2)) {
-      currentBackPressTime = now;
-      Fluttertoast.showToast(
-        msg: "Press back again to exit",
-        backgroundColor: Color(0xFF045c8f),
-        fontSize: 16,
-        gravity: ToastGravity.BOTTOM,
-      );
-      return Future.value(false);
-    }
-    return Future.value(true);
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    print(Get.arguments as String);
   }
 }

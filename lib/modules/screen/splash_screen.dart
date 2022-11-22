@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(Duration(seconds: 3), () {
-      Get.offNamed(DashboardScreenViewRoute);
+      Get.offNamed(DashboardScreenViewRoute, arguments: "Ini data");
     });
   }
   @override
